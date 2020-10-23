@@ -1,3 +1,5 @@
+![Banner](./images/convai_smile.gif)
+
 For preprocessing of data, two different training sources are used.
 1) A counsel chat data based on online question and response by certified therapist is downloaded. The dataset and preprocessing script is adapted from https://github.com/nbertagnolli/counsel-chat To convert the counsel data into convai model format use the following command
 python -m model_pipeline.counsel_data_preprocess --max_tokens 200 --n 3
