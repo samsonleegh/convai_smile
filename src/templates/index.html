@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Conversation Partner</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../static/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="../static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic"
+    rel="stylesheet" type="text/css">
+  <link href="../static/vendor/simple-line-icons/css/simple-line-icons.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="../static/css/stylish-portfolio.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <a class="menu-toggle rounded" href="#">
+    <i class="fas fa-bars"></i>
+  </a>
+  <nav id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li class="sidebar-brand">
+        <a class="js-scroll-trigger" href="#page-top">Start Bootstrap</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#page-top">Home</a>
+      </li>
+      <li class="sidebar-nav-item">
+        <a class="js-scroll-trigger" href="#about">About</a>
+      </li>
+    </ul>
+  </nav>
+
+  <!-- Header -->
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1">ConvAI <i class="fas fa-frog style='font-size:72px;"></i></h1> 
+      <div class="page-content page-container" id="page-content">
+        <div class="padding">
+
+          <div class="row justify-content-md-center">
+            <div class="col col-lg-7">
+              <div class="card card-bordered">
+                <div class="card-header">
+                  <h4 class="card-title"><strong>Chat</strong></h4> <a class="btn btn-xs btn-secondary" href="#"
+                    data-abc="true">ConvAI</a> 
+                </div>
+                <div class="ps-container ps-theme-default ps-active-y" id="chat-content"
+                  style="overflow-y: scroll !important; height:400px !important;">
+                  <div class="media media-chat">
+                    <i class="fas fa-frog style='font-size:36px;"></i>
+                    <div class="media-body">
+                      <p style="text-align:left;">{{reply}}</p>
+                    </div>
+                    </div>
+                  {% for i, x in enumerate(history) %}
+                  {% if i%2 == 0 %}
+                  <div class="media media-chat media-chat-reverse">
+                  <div class="media-body">
+                    <p style="text-align:right;">{{x}}</p>
+                  </div>
+                  </div>
+                  {% else %}
+                  <div class="media media-chat">
+                    <i class="fas fa-frog style='font-size:36px;"></i>
+                    <div class="media-body">
+                      <p style="text-align:left;">{{x}}</p>
+                    </div>
+                    </div>
+                  {% endif %}
+                  {% endfor %}
+                  <div class="ps-scrollbar-x-rail" style="left: 0px; bottom: 0px;">
+                    <div class="ps-scrollbar-x" tabindex="0" style="left: 0px; width: 0px;"></div>
+                  </div>
+                  <div class="ps-scrollbar-y-rail" style="top: 0px; height: 0px; right: 2px;">
+                    <div class="ps-scrollbar-y" tabindex="0" style="top: 0px; height: 2px;"></div>
+                  </div>
+                </div>
+                <form action="/conv" method="post">
+                  <input class="form-control" name="text" placeholder="Write something...">
+                  <input class="btn btn-outline-dark" type="submit">
+                </form>
+              </div>
+            </div>
+            <div class="col-col-lg-3">
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+            <div class="col-md-auto">
+            <div class="decoder-settings">
+              <div class="title"><br>
+                <h5>Current Settings:</h5><br>
+                  Top-k: {{topk}}<br>
+                  Top-p: {{topp}}<br>
+                  Temperature: {{temp}}<br>
+                  Max Length: {{max_len}}<br><br><br>
+                <h5>Default Settings<a target="_blank" href="https://medium.com/huggingface/how-to-build-a-state-of-the-art-conversational-ai-with-transfer-learning-2d818ac26313#79c5">
+                  <i class="fas fa-info-circle" style='font-size:16px;color:white'></i></a></h5><br>
+                
+                <form action="/setting" method="post">
+                <div class="setting">
+                  <div class="desc">
+                    <span>Top-k</span>
+                  </div>
+                  <input name="topk" type="range" value="0" min="0" max="200" step="1" oninput="this.nextElementSibling.value = this.value">
+                  <output>0</output> <br>
+                </div>    
+                <div class="setting">
+                  <div class="desc">
+                    <span>Top-p</span>
+                  </div>
+                  <input name="topp" type="range" value="0.9" min="0" max="1" step="0.1" oninput="this.nextElementSibling.value = this.value">
+                  <output>0.9</output> <br>
+                </div>
+                <div class="setting">
+                  <div class="desc">
+                    <span>Temperature</span>
+                  </div>
+                  <input name="temp" type="range" value="0.6" min="0" max="2" step="0.1" oninput="this.nextElementSibling.value = this.value">
+                  <output>0.6</output> <br>
+                </div>
+                <div class="setting">
+                  <div class="desc">
+                    <span>Max Length</span>
+                  </div>
+                  <input name="max_len" type="range" value="50" min="1" max="200" step="1" oninput="this.nextElementSibling.value = this.value">
+                  <output>50</output> <br>
+                </div>
+                <br>
+                <input class="btn bbtn btn-outline-light btn-sm" type="submit" value="Change Settings">
+              </form>
+            </div>
+            <br>      
+            </div>
+            
+            </div>
+          </div>
+          <br><br>
+          <h4>Personality:</h4>
+          <br>
+          {% for trait in personality %}
+          {{ trait }}
+          <br>
+          {% endfor %}
+          <br>
+        </div>
+      </div>
+    <div class="overlay"></div>
+  </header>
+
+  <!-- About -->
+  <!-- <section class="content-section bg-light" id="about">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-10 mx-auto">
+          <h2>Stylish Portfolio is the perfect theme for your next project!</h2>
+          <p class="lead mb-5">This theme features a flexible, UX friendly sidebar menu and stock photos from our
+            friends at
+            <a href="https://unsplash.com/">Unsplash</a>!</p>
+          <a class="btn btn-dark btn-xl js-scroll-trigger" href="#services">What We Offer</a>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded js-scroll-trigger" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.js"></script>
+  <script src="../static/vendor/jquery/jquery.min.js"></script>
+  <script src="../static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="../static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="../static/js/stylish-portfolio.min.js"></script>
+
+</body>
+
+</html>

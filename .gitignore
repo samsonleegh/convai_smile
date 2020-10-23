@@ -1,0 +1,9 @@
+#model
+saved_model/
+cache_dir/
+
+#data
+data/
+
+#tokens
+.env
