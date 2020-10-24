@@ -25,11 +25,11 @@ The current model blends an addition of <b>empathy</b> and off-screen <b>movie c
 - [Footer](#footer)
 
 ## Model Architecture
-The model uses transfer learning whereby the underlying model is the [pre-trained GPT model](https://github.com/huggingface/transfer-learning-conv-ai) (by HuggingFace) on the [PERSONA-CHAT](https://arxiv.org/abs/1801.07243) 10k chit-chat dataset from Facebook. A few innovative features of the model include the incoporation of persona descriptions and dialogue history during training. These training inputs help with the consistency of bot personality while incorporating context of previous dialogue. To do so, token embeddings from GPT for each segment are concatenated, together with position and segment embeddings to demarcate the segment type as shown below. <br><br>
+The model uses transfer learning whereby the underlying model is the [pre-trained ConvAI GPT model](https://github.com/huggingface/transfer-learning-conv-ai) (by HuggingFace) on [PERSONA-CHAT](https://arxiv.org/abs/1801.07243), a 10k chit-chat dataset from Facebook. A few innovative features of the model include the incoporation of persona descriptions and dialogue history during training. These training inputs help with the consistency of bot personality while incorporating context of previous dialogue. To do so, token embeddings from GPT for each segment are concatenated, together with position and segment embeddings to demarcate the segment type as shown below. <br><br>
 The model is termed "Double-Head" as it undergoes a multi-task training where one head will compute language modeling predictions while the other head will predict next-sentence classification labels. For more details please refer to HuggingFace's [comprehensive article](https://medium.com/huggingface/how-to-build-a-state-of-the-art-conversational-ai-with-transfer-learning-2d818ac26313) on their model training<br><br>
 ![Double-Head](./images/training_doublehead.png) <br><br>
 
-For the updated model, two new dialogue sets are introduced. The primary motive of adding in counselchat dialogue dataset is to introduce a level of quality response on mental health questions by users. On the site, verified therapists respond to questions posed by users, the most helpful response will be upvoted by users. There are 31 topics ranging from depression to sleep improvement. By training the bot to give 'meaningful' replies learnt from counselchat therapists, the model hopes to bring a level of quality empathy to the bot. The next dataset is taken from scripts of movies - Before Sunrise Triology. This serves as a test to incorporate interesting dialogues and for users to experience talking to on-screen characters from movies they enjoy watching. One learning is to ensure scripts are taken from movies with limited characters and settings. As characters interact differently with other characters for different settings, movies with too many characters and plots generally does not fit well as training dataset. <br><br>
+For the updated model, two new dialogue sets are introduced. The primary motive of adding in counselchat dialogue dataset is to introduce a level of <b>quality response on mental health questions</b> by users. On the site, verified therapists respond to questions posed by users, the most helpful response will be upvoted by users. There are 31 topics ranging from depression to sleep improvement. By training the bot to give 'meaningful' replies learnt from counselchat therapists, the model hopes to bring a level of quality empathy to the bot. The next dataset is taken from scripts of movies - Before Sunrise Triology. This serves as a test to incorporate interesting dialogues and for users to <b>experience talking to on-screen characters from movies</b> they enjoy watching. One learning is to ensure scripts are taken from movies with limited characters and settings. As characters interact differently with other characters in different settings, movie dataset with too many characters and plots generally causes low model performance. <br><br>
 A gridsearch is done during training to pick the best parameters. An early stop is used on language model F1 score. The selected specification are as follows:
 
 | Specification | Details |
@@ -45,8 +45,8 @@ A gridsearch is done during training to pick the best parameters. An early stop 
 | No. of candidates | 2 |
 | Max seq. length | 128 |
 | Sample size | 1877 training, 84 validation |
-
-As a comparison against the original model score, the transfer learnt model is performing worst off. This could be attributed to the limited dataset and dialogues of a different nature. Movie dialogues and counsel chats are inherently longer due to their descriptive nature. The difficulty of prediction as sentences get longer of different context (therapy and movies) has brought a lower score. Nevertheless, the model still retains its original chit-chat abilities, albeit with a certain portion of empathetic responses and some interesting dialogues.
+<br>
+As a comparison against the original model score, the transfer learnt model is performing worse off - higher perplexity and lower F1. This could be attributed to the limited dataset and dialogues of a different nature. Movie dialogues and counsel chats are inherently longer due to their descriptive nature. The difficulty of prediction increases as sentences get longer and of a different context from chit-chat (counselling and movie dialogues). Nevertheless, the model still retain its original chit-chat abilities, albeit with a certain portion of empathetic responses and movie-like interesting exchanges.
 
 | Metrics | Transfer Learning Scores | Original Scores |
 | ------ | ------ | ------ |
@@ -97,12 +97,14 @@ pip install -r requirements.txt
 
 For preprocessing of data, two different training sources are used.
 - A counsel chat data based on online question and response by certified therapist is downloaded. The dataset and preprocessing script is adapted from https://github.com/nbertagnolli/counsel-chat To convert the counsel data into convai model format use the following command
+```
 python -m model_pipeline.counsel_data_preprocess --max_tokens 200 --n 3
+```
 where max_tokens are the max length of answer/response to be used and n is the number of randomly selected candidates to be trained against the given response. Output will be saved as json format in data file.
 - Movie script dialogues are downloaded as pdf and converted into convai data format. Movie scripts with good dialogues between limited parties are preferred.
 Download the movie script you want in the same pdf format. Use the following command and change the pdf_file directory name. `sel_char_1` is the characters you want in the training data, where the first character 'CELINE' will be trained as the bot response. The other characters will be
 the query party. `max_tokens` are the max length of answer/response to be used, n is the number of randomly selected candidates to be trained against the given response
-and `test_size` is the portion of dataset to be used for validation. Output will be saved as json format in data file.
+and `test_size` is the portion of dataset to be used for validation. Output will be saved as json format in data file. The movie_data_preprocess script will automatically append the dataset from counsel chat as well.
 
 ``` 
 python -m model_pipeline.movie_data_preprocess --pdf_file './data/before-sunrise.pdf' --sel_chars_1 CELINE JESSE --max_tokens 100 --n 3 --test_size 0.2 
