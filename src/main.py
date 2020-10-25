@@ -24,7 +24,7 @@ logger = logging.getLogger("flask_app")
 TOPK = 0
 TOPP = 0.9
 TEMP = 0.6
-MAX_LEN = 5
+MAX_LEN = 30
 
 interact_args = {
     "cache_dir": "./cache_dir/",
@@ -58,8 +58,7 @@ global personality_decode
 personality_decode = [tuned_model.tokenizer.decode(
     desc) for desc in personality]
 
-
-HISTORY_FPATH = './data/history.csv'
+HISTORY_FPATH = '/tmp/history.csv' #need /tmp folder for writing in docker container
 hist_df = pd.DataFrame({'history': [],
                         'history_decode': []})
 hist_df.to_csv(HISTORY_FPATH)

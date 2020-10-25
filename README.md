@@ -135,7 +135,7 @@ This will run the app on your local machine's port 8000. Copy the link into the 
 ### Deployment
 
 *Docker*
-- You can choose to skip the installation and usage step and deploy directly with Dockers instead.
+- You can choose to skip the installation and usage step by deploying directly with Dockers instead.
 - If you’re not sure if you have Docker installed, you can check by running:
 ```
 docker -v && docker-compose -v
@@ -146,6 +146,11 @@ docker -v && docker-compose -v
 
 If Docker is installed on your machine, you should see the output illustrating the installed version of Docker and Docker Compose. If you need to install docker, you can refer to the [Docker official website](https://docs.docker.com/get-docker/) for more information.
 
-The `conda.yml` file contains the environment dependencies for Docker image creation. The `Dockerfile` contains an sample of image creation. (WIP)
+The `requirements.txt` file contains the packages required for Docker image. The `Dockerfile` contains an sample of image creation.
+Run the following command and the user interface should be available on `http://0.0.0.0:8000/`
+```
+docker build <insert directory here>/convai_smile -t convai_smile
+docker run -p 8000:8000 convai_smile
+```
 
 
