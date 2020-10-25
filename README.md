@@ -4,7 +4,7 @@
 ![GitHub last commit](https://img.shields.io/badge/last%20commit-Oct%2020-yellow)
 
 ConvAI Smile uses transfer learning to build a dialog agent based on OpenAI GPT. It is the author's intent to bring smiles on users via the interaction with the bot - either through interesting dialogues or the ability to uplift one's mood with some level of 'understanding'. The [original model](https://medium.com/huggingface/how-to-build-a-state-of-the-art-conversational-ai-with-transfer-learning-2d818ac26313) by HuggingFace finished 1st 🏆 in the automatic track of the Conversational Intelligence Challenge 2 [ConvAI2](http://convai.io/), a dialog competition at [NeurIPS 2018](https://nips.cc/Conferences/2018). <br>
-The current model blends an addition of <b>empathy</b> and off-screen <b>movie character dialogues</b> on top of the original model by incorporating exchanges from [counselchat](https://towardsdatascience.com/counsel-chat-bootstrapping-high-quality-therapy-data-971b419f33da) and movie scripts from [Before Sunrise Triology](https://indiegroundfilms.files.wordpress.com/2014/01/before-sunrise-numbered.pdf), an indie romance comedy.
+The current model blends an addition of <b>empathy</b> and off-screen <b>movie character dialogue style</b> on top of the original model by incorporating exchanges from [counselchat](https://towardsdatascience.com/counsel-chat-bootstrapping-high-quality-therapy-data-971b419f33da) and movie scripts from [Before Sunrise Triology](https://indiegroundfilms.files.wordpress.com/2014/01/before-sunrise-numbered.pdf), an indie romance comedy.
 
 ## Demo-Preview
 ![Random GIF](./images/convai_smile.gif)
