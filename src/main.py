@@ -181,7 +181,7 @@ def setting(request: Request, topk: int=Form(...), topp: float=Form(...), temp: 
         desc) for desc in personality]
 
     # reset history
-    HISTORY_FPATH = './data/history.csv'
+    # HISTORY_FPATH = './tmp/history.csv'
     hist_df = pd.DataFrame({'history': [],
                             'history_decode': []})
     hist_df.to_csv(HISTORY_FPATH)
@@ -199,7 +199,7 @@ def setting(request: Request, topk: int=Form(...), topp: float=Form(...), temp: 
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", debug=True, port=8000)
+    app.run(host="0.0.0.0", debug=True, port=80)
 
         # history = []
         # while True:
