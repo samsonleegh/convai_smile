@@ -6,8 +6,8 @@
 ConvAI Smile uses transfer learning to build a dialog agent based on OpenAI GPT. It is the author's intent to bring smiles on users via the interaction with the bot - either through interesting dialogues or the ability to uplift one's mood with some level of 'understanding'. The [original model](https://medium.com/huggingface/how-to-build-a-state-of-the-art-conversational-ai-with-transfer-learning-2d818ac26313) by HuggingFace finished 1st 🏆 in the automatic track of the Conversational Intelligence Challenge 2 [ConvAI2](http://convai.io/), a dialog competition at [NeurIPS 2018](https://nips.cc/Conferences/2018). <br>
 The current model blends an addition of <b>empathy</b> and off-screen <b>movie character dialogue style</b> on top of the original model by incorporating exchanges from [counselchat](https://towardsdatascience.com/counsel-chat-bootstrapping-high-quality-therapy-data-971b419f33da) and movie scripts from [Before Sunrise Triology](https://indiegroundfilms.files.wordpress.com/2014/01/before-sunrise-numbered.pdf), an indie romance comedy.
 
-## Demo-Preview
-![Random GIF](./images/convai_smile.gif)
+## Demo-Preview - access Convai Smile over [here](http://206.189.79.54/)
+![Random GIF](./images/convai_smile.gif) 
 
 ## Table of contents
 
@@ -153,4 +153,27 @@ docker build <insert directory here>/convai_smile -t convai_smile
 docker run -p 8000:8000 convai_smile
 ```
 
+*Deployment on DigitalOcean server*
+- Link as follows: http://206.189.79.54/
+
+- For deployment on online server (DigitalOcean), refer to these great articles [1](https://towardsdatascience.com/how-to-deploy-your-machine-learning-web-app-to-digital-ocean-64bd19ce15e2) [2](https://medium.com/intuitive-deep-learning/building-a-web-application-to-deploy-machine-learning-models-b0eb39798476)
+
+- For future self-reference:
+```
+# copy codes and files to server
+ssh root@206.189.79.54
+git clone https://github.com/samsonleegh/convai_smile.git
+
+# from local
+scp -r /Users/samsonlee/Documents/aisg/projects/chatbot/convai_smile/saved_model root@206.189.79.54:~/convai_smile
+scp -r /Users/samsonlee/Documents/aisg/projects/chatbot/convai_smile/cache_dir root@206.189.79.54:~/convai_smile
+
+# install and run dockers container
+snap install docker
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+docker build -t convai_smile .
+docker run -p 80:8000 convai_smile
+```
 
