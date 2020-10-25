@@ -135,7 +135,7 @@ This will run the app on your local machine's port 8000. Copy the link into the 
 ### Deployment
 
 *Docker*
-- You can choose to skip the installation and usage step by deploying directly with Dockers instead.
+- After running the model training, with saved model in `convai_smile/saved_model` and tokenizers in `convai_smile/cache_dir` directories, you can deploy directly with Dockers.
 - If you’re not sure if you have Docker installed, you can check by running:
 ```
 docker -v && docker-compose -v

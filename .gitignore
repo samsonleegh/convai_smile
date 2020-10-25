@@ -3,7 +3,7 @@ saved_model/
 cache_dir/
 
 #data
-data/
+#data/
 
 #tokens
 .env
