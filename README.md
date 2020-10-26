@@ -176,7 +176,7 @@ docker run -p 80:8000 convai_smile
 ```
 
 ### Citation
-NeurIPS CAI workshop paper:
+NeurIPS CAI workshop [paper](https://arxiv.org/pdf/1901.08149.pdf):
 ```
 @article{DBLP:journals/corr/abs-1901-08149,
   author    = {Thomas Wolf and
