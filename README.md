@@ -44,7 +44,8 @@ A gridsearch is done during training to pick the best parameters. An early stop 
 | Max seq. length | 128 |
 | Sample size | 1877 training, 84 validation |
 <br>
-As a comparison against the original model score, the transfer learnt model is performing worse off - higher perplexity and lower F1. This could be attributed to the limited dataset and dialogues of a different nature. Movie dialogues and counsel chats are inherently longer due to their descriptive nature, and are less repetitive. The difficulty of prediction increases as sentences get longer and are of a different context from chit-chat (counselling and movie dialogues). Nevertheless, the model still retain its original chit-chat abilities, albeit with a certain portion of empathetic responses and movie-like interesting exchanges. Further model iteration could look into only unfreezing the last few layers of the model, keeping the underlying semantics learnt from chit-chat prose.<br>
+As a comparison against the original model score, the transfer learnt model is performing worse off - higher perplexity and lower F1. This could be attributed to the limited dataset and dialogues of a different nature. Movie dialogues and counsel chats are inherently longer due to their descriptive nature, and are less repetitive. The difficulty of prediction increases as sentences get longer and are of a different context from chit-chat (counselling and movie dialogues). Nevertheless, the model still retain its original chit-chat abilities, albeit with a certain portion of empathetic responses and movie-like interesting exchanges. Further model iteration could look into only unfreezing the last few layers of the model, keeping the underlying semantics learnt from chit-chat prose.
+
 | Metrics | Transfer Learning Scores | Original Scores |
 | ------ | ------ | ------ |
 | Perplexity | 22.5 | 20.5 |
