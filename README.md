@@ -19,10 +19,8 @@ The current model blends an addition of <b>empathy</b> and off-screen <b>movie c
 - [Usage](#usage)
 - [Development](#development)
 - [Deployment](#deployment)
-- [CI/CD](#cicd)
-- [Contribute](#contribute)
 - [License](#license)
-- [Footer](#footer)
+- [Citation](#citation)
 
 ## Model Architecture
 The model uses transfer learning whereby the underlying model is the [pre-trained ConvAI GPT model](https://github.com/huggingface/transfer-learning-conv-ai) (by HuggingFace) on [PERSONA-CHAT](https://arxiv.org/abs/1801.07243), a 10k chit-chat dataset from Facebook. A few innovative features of the model include the incoporation of persona descriptions and dialogue history during training. These training inputs help with the consistency of bot personality while incorporating context of previous dialogue. To do so, token embeddings from GPT for each segment are concatenated, together with position and segment embeddings to demarcate the segment type as shown below. <br><br>
@@ -177,3 +175,23 @@ docker build -t convai_smile .
 docker run -p 80:8000 convai_smile
 ```
 
+### Citation
+```
+@article{DBLP:journals/corr/abs-1901-08149,
+  author    = {Thomas Wolf and
+               Victor Sanh and
+               Julien Chaumond and
+               Clement Delangue},
+  title     = {TransferTransfo: {A} Transfer Learning Approach for Neural Network
+               Based Conversational Agents},
+  journal   = {CoRR},
+  volume    = {abs/1901.08149},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1901.08149},
+  archivePrefix = {arXiv},
+  eprint    = {1901.08149},
+  timestamp = {Sat, 02 Feb 2019 16:56:00 +0100},
+  biburl    = {https://dblp.org/rec/bib/journals/corr/abs-1901-08149},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
